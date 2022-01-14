@@ -10,9 +10,15 @@ const connect = async()=>{
 
 const signup= require('./controllers/auth.controller')
 const album=require('./controllers/albumController')
+const artist=require('./controllers/artist')
+const song= require('./controllers/songController')
 app.use('/signup',signup)
 
 app.use('/album',album)
+
+app.use('/artist',artist)
+
+app.use('/song',song)
 
 app.listen(3000,async(req,res)=>{
     await connect()

@@ -2,8 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 const User = require("../models/user.model");
+const Album=require("../models/album")
 const { body, validationResult } = require("express-validator");
 
+
+
+
+  
 router.post(
   "/",
   body("name")
@@ -17,7 +22,7 @@ router.post(
 
     let user;
     try {
-      if (!error.isEmpty) return res.status(400).send({ err: error });
+      if (!error.isEmpty()) return res.status(400).send({ err: error });
 
       user = await User.findOne({ email: req.body.email });
 
@@ -43,5 +48,17 @@ router.post("/login", async (req, res) => {
     return res.status(404).send({ err: error });
   }
 });
+
+
+router.get("/",async(req, res)=>{
+    try {
+        
+        let response= await User.find({})
+
+        return res.status(200).send({data:response})
+    } catch (error) {
+        return res.status(400).send({err:error})
+    }
+})
 
 module.exports = router;
