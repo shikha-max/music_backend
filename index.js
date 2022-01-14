@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 app.use(express.json())
 
 const connect = async()=>{
-    return await mongoose.connect('mongodb://127.0.0.1:27017/musicApp')
+    return await mongoose.connect('mongodb+srv://country:country123@cluster0.dxb6c.mongodb.net/musicApp?retryWrites=true&w=majority')
 }
 
 const signup= require('./controllers/auth.controller')

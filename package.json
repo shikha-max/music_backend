@@ -20,7 +20,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "nodemon": "nodemon index"
+    "nodemon": "node index"
   },
   "keywords": [],
   "author": "",
