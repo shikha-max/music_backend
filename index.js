@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 app.use(express.json())
 
 const connect = async()=>{
-    return await mongoose.connect('mongodb+srv://shikha:shikha_123@cluster0.wzqbc.mongodb.net/musicApp?retryWrites=true&w=majority')
+    return await mongoose.connect('mongodb+srv://shikha:shikha_123@cluster0.wzqbc.mongodb.net/music?retryWrites=true&w=majority')
 }
 
 const signup= require('./controllers/auth.controller')
