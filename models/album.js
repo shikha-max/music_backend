@@ -5,7 +5,7 @@ const albmSchema=new mongoose.Schema({
     type:{type:String,required:true,default:"album"},
     genre:{type:String,required:true},
     img:{type:String,required:true},
-    year:{type:,required:true}
+    year:{type:Number,required:true}
 })
 
 
