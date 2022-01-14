@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 app.use(express.json())
 
 const connect = async()=>{
-    return await mongoose.connect('mongodb+srv://country:country123@cluster0.dxb6c.mongodb.net/musicApp?retryWrites=true&w=majority')
+    return await mongoose.connect('mongodb+srv://shikha:shikha_123@cluster0.wzqbc.mongodb.net/musicApp?retryWrites=true&w=majority')
 }
 
 const signup= require('./controllers/auth.controller')
@@ -20,7 +20,7 @@ app.use('/artist',artist)
 
 app.use('/song',song)
 
-app.listen(3000,async(req,res)=>{
+app.listen(3001,async(req,res)=>{
     await connect()
     console.log('running on 2234 port');
 })
