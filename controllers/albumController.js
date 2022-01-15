@@ -59,7 +59,7 @@ router.get('/',async (req, res)=>{
         // let reply= await data.find().skip(offset).limit(limit).lean().exec()
         // res.send({reply,totalpage})
         let response= await Album.find({}).populate('artist').lean().exec()
-        return res.status(200).send({data:response,totalpage:totalpage})
+        return res.status(200).send({data:response})
 
 
     } catch (error) {
