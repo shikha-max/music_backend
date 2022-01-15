@@ -15,7 +15,7 @@ router.get('/:id/songs',async (req, res)=>{
         let page= +req.query.page||1
         let limit= +req.query.limit||4
         let offset=Math.ceil((page-1)*limit)
-        let totalpage= await Song.find().countDocuments()
+        let totalpage= await Song.find({album:req.params.id}).countDocuments()
     
         totalpage=Math.ceil(totalpage/limit)
         //let reply= await data.find().skip(offset).limit(limit).lean().exec()
