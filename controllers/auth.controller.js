@@ -6,7 +6,7 @@ const Album=require("../models/album")
 const { body, validationResult } = require("express-validator");
 
 
-
+//-----------------signup----------------------------------------//
 
   
 router.post(
@@ -37,6 +37,10 @@ router.post(
   }
 );
 
+
+
+//--------------------------login-----------------------------------//
+
 router.post("/login", async (req, res) => {
   try {
     let user = await User.findOne({ email: req.body.email });
@@ -48,6 +52,9 @@ router.post("/login", async (req, res) => {
     return res.status(404).send({ err: error });
   }
 });
+
+
+//--------------------------getting all user------------------------------//
 
 
 router.get("/",async(req, res)=>{

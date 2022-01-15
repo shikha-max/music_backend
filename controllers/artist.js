@@ -3,10 +3,13 @@ const router = express.Router();
 
 const User = require("../models/user.model");
 const Album=require("../models/album")
-const Song= require('../models/songs')
-const { body, validationResult } = require("express-validator");
 
 
+
+
+
+
+//---------------geting perticular artist with its album------------------------------//
 
 router.get("/:artist/album", async (req, res) => {
     try {
@@ -20,5 +23,7 @@ router.get("/:artist/album", async (req, res) => {
       return res.status(404).send({ err: error });
     }
   });
+
+
 
   module.exports =router

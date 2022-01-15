@@ -4,6 +4,10 @@ const router = express.Router()
 const song= require('../models/songs')
 
 const Album = require('../models/album')
+
+
+
+//------------------------creating a song-----------------------//
 router.post('/',async (req, res)=>{
     try {
         let data= await song.create(req.body)
@@ -17,21 +21,22 @@ router.post('/',async (req, res)=>{
 })
 
 
+
+//-------------------perticular song with album-----------------------------------//
+
 router.get('/:id',async (req, res)=>{
     try {
-        let data= await song.find({album: req.params.id}).populate({
-            path:'album',
-            model:'album',
-            select:{'album_name':1}
-        }).lean().exec()
-
-        return res.status(200).send({data:data})
+        let data= await song.find({album: req.params.id}).populate('album').lean().exec()
+        console.log(data);
+        return res.status(200).send({datas:data})
     } catch (error) {
         return res.status(400).send({err:error})
     }
 })
 
 
+
+//---------------getn all songs----------------------------------//
 
 router.get('/',async (req, res)=>{
     try {
