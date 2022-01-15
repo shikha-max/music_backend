@@ -23,6 +23,32 @@ router.get('/:id/songs',async (req, res)=>{
     }
 })
 
+
+router.get('/search',async (req, res)=>{
+
+    try {
+
+        let s = req.query.q
+  
+        let nikal = new RegExp(s, "i")
+        // const country = await Country.find({
+        //   country: { $regex: nikal },
+        // });
+        let resp= await Album.find({genre:{$regex:nikal}})
+
+        return res.status(200).send({data:resp})
+
+    } catch (error) {
+        return res.status(400).send({err:error})
+    }
+})
+
+
+
+
+
+
+
 router.get('/',async (req, res)=>{
     try {
         
