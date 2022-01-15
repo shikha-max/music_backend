@@ -63,7 +63,7 @@ router.get('/',async (req, res)=>{
     try {
         
     let page= +req.query.page||1
-    let limit= +req.query.limit||4
+    let limit= +req.query.limit||6
     let offset=Math.ceil((page-1)*limit)
     let totalpage= await Album.find().countDocuments()
 
