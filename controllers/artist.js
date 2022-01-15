@@ -13,7 +13,7 @@ const Album=require("../models/album")
 
 router.get("/:artist/album", async (req, res) => {
     try {
-      let user = await User.findById(req.params.artist );
+      let user = await User.find({name:req.params.artist});
   
       if (!user)return res.status(404).send({ err: "no" });
   

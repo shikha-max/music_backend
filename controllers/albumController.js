@@ -31,9 +31,7 @@ router.get('/search',async (req, res)=>{
         let s = req.query.q
   
         let nikal = new RegExp(s, "i")
-        // const country = await Country.find({
-        //   country: { $regex: nikal },
-        // });
+       
         let resp= await Album.find({genre:{$regex:nikal}}).populate('artist')
 
         return res.status(200).send({data:resp})
@@ -52,8 +50,16 @@ router.get('/search',async (req, res)=>{
 router.get('/',async (req, res)=>{
     try {
         
-        let response= await Album.find({}).populate('artist').lean().exec()
-        return res.status(200).send({data:response})
+        let page= +req.query.page||1
+        let limit= +req.query.limit||2
+        let offset=Math.ceil((page-1)*limit)
+        let totalpage= await data.find().countDocuments()
+    
+        totalpage=Math.ceil(totalpage/limit)
+        // let reply= await data.find().skip(offset).limit(limit).lean().exec()
+        // res.send({reply,totalpage})
+        let response= await Album.find({}).populate('artist').skip(offset).limit(limit).lean().exec()
+        return res.status(200).send({data:response,totalpage:totalpage})
 
 
     } catch (error) {
