@@ -26,10 +26,22 @@ router.post('/',async (req, res)=>{
 
 router.get('/:id/album',async (req, res)=>{
     try {
-        let data= await song.find({album: req.params.id}).lean().exec()
-        let album= await Album.findById(req.params.id).lean().exec()
+        let page= +req.query.page||1
+        let limit= +req.query.limit||3
+        let offset=Math.ceil((page-1)*limit)
+        let totalpage= await song.find().countDocuments()
+    
+        totalpage=Math.ceil(totalpage/limit)
+        //let reply= await data.find().skip(offset).limit(limit).lean().exec()
+            // let response= await Album.find({}).populate('artist').skip(offset).limit(limit).lean().exec()
+            // console.log('jdsak')
+            // return res.status(200).send({data:response,totalpage:totalpage})
+    
+    
+        let data= await song.find({album: req.params.id}).skip(offset).limit(limit).lean().exec()
+        let album= await Album.findById(req.params.id).skip(offset).limit(limit).lean().exec()
         
-        return res.status(200).send({datas:data,album:album})
+        return res.status(200).send({datas:data,album:album,totalpage:totalpage})
     } catch (error) {
         return res.status(400).send({err:error})
     }
