@@ -59,7 +59,7 @@ router.get('/',async (req, res)=>{
     //let reply= await data.find().skip(offset).limit(limit).lean().exec()
         let response= await Album.find({}).populate('artist').skip(offset).limit(limit).lean().exec()
         console.log('jdsak')
-        return res.status(200).send({data:response})
+        return res.status(200).send({data:response,totalpage:totalpage})
 
 
     } catch (error) {
