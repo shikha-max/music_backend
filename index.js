@@ -20,7 +20,7 @@ app.use('/artist',artist)
 
 app.use('/song',song)
 
-app.listen(3001,async(req,res)=>{
+app.listen(4001,async(req,res)=>{
     await connect()
     console.log('running on 2234 port');
 })

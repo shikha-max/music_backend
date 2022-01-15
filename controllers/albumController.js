@@ -50,7 +50,15 @@ router.get('/search',async (req, res)=>{
 router.get('/',async (req, res)=>{
     try {
         
-        let response= await Album.find({}).populate('artist').lean().exec()
+    let page= +req.query.page||1
+    let limit= +req.query.limit||4
+    let offset=Math.ceil((page-1)*limit)
+    let totalpage= await Album.find().countDocuments()
+
+    totalpage=Math.ceil(totalpage/limit)
+    //let reply= await data.find().skip(offset).limit(limit).lean().exec()
+        let response= await Album.find({}).populate('artist').skip(offset).limit(limit).lean().exec()
+        console.log('jdsak')
         return res.status(200).send({data:response})
 
 
