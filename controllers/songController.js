@@ -24,7 +24,7 @@ router.post('/',async (req, res)=>{
 
 //-------------------perticular song with album-----------------------------------//
 
-router.get('/:id',async (req, res)=>{
+router.get('/:id/album',async (req, res)=>{
     try {
         let data= await song.find({album: req.params.id}).populate('album').lean().exec()
         console.log(data);
