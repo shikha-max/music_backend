@@ -12,10 +12,22 @@ const Song= require('../models/songs')
 router.get('/:id/songs',async (req, res)=>{
     try {
         
-        let response= await Album.findById(req.params.id).lean().exec()
+        let page= +req.query.page||1
+        let limit= +req.query.limit||4
+        let offset=Math.ceil((page-1)*limit)
+        let totalpage= await Song.find().countDocuments()
+    
+        totalpage=Math.ceil(totalpage/limit)
+        //let reply= await data.find().skip(offset).limit(limit).lean().exec()
+            // let response= await Album.find({}).populate('artist').skip(offset).limit(limit).lean().exec()
+            // console.log('jdsak')
+            // return res.status(200).send({data:response,totalpage:totalpage})
+    
+    
+        let response= await Album.findById(req.params.id).skip(offset).limit(limit).lean().exec()
 
-        let songs= await Song.find({album: req.params.id})
-        return res.status(200).send({data:response,song:songs})
+        let songs= await Song.find({album: req.params.id}).skip(offset).limit(limit).lean().exec()
+        return res.status(200).send({data:response,song:songs,totalpage:totalpage})
 
 
     } catch (error) {
