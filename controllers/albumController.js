@@ -34,7 +34,7 @@ router.get('/search',async (req, res)=>{
         // const country = await Country.find({
         //   country: { $regex: nikal },
         // });
-        let resp= await Album.find({genre:{$regex:nikal}}).populate('artist')
+        let resp= await Album.find({genre:{$regex:nikal}}).populate('user')
 
         return res.status(200).send({data:resp})
 
