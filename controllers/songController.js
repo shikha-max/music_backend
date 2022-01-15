@@ -26,9 +26,10 @@ router.post('/',async (req, res)=>{
 
 router.get('/:id/album',async (req, res)=>{
     try {
-        let data= await song.find({album: req.params.id}).populate('album').lean().exec()
-        console.log(data);
-        return res.status(200).send({datas:data})
+        let data= await song.find({album: req.params.id}).lean().exec()
+        let album= await Album.findById(req.params.id).lean().exec()
+        
+        return res.status(200).send({datas:data,album:album})
     } catch (error) {
         return res.status(400).send({err:error})
     }
