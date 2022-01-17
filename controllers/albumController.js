@@ -63,7 +63,7 @@ router.get('/',async (req, res)=>{
     try {
 
         let s = req.query.filter||''
-        let sort1= req.query.sort
+        let sort1= +req.query.sort
         
         
   if(s||sort1){
@@ -75,7 +75,7 @@ router.get('/',async (req, res)=>{
     let totalpage= await Album.find({genre:s}).countDocuments()
     totalpage=Math.ceil(totalpage/limit)
    
-    let resp= await Album.find({genre:{$regex:nikal}}).populate('artist').skip(offset).limit(limit).sort({'year':1}).lean().exec()
+    let resp= await Album.find({genre:{$regex:nikal}}).populate('artist').skip(offset).limit(limit).sort({'year':sort1}).lean().exec()
 
 
    return  res.status(200).send({data:resp,totalpage:totalpage})
