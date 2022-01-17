@@ -63,6 +63,7 @@ router.get('/',async (req, res)=>{
     try {
 
         let s = req.query.filter
+        
   if(s){
       
     let nikal = new RegExp(s, "i")
@@ -86,7 +87,7 @@ router.get('/',async (req, res)=>{
     totalpage=Math.ceil(totalpage/limit)
    
         let response= await Album.find({}).populate('artist').skip(offset).limit(limit).lean().exec()
-        console.log('jdsak')
+       // console.log('jdsak')
         return res.status(200).send({data:response,totalpage:totalpage})
 
 
