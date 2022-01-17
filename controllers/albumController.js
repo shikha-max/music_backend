@@ -75,7 +75,7 @@ router.get('/',async (req, res)=>{
     let totalpage= await Album.find({genre:s}).countDocuments()
     totalpage=Math.ceil(totalpage/limit)
    
-    let resp= await Album.find({genre:{$regex:nikal}}).populate('artist').sort(['year',sort1]).skip(offset).limit(limit).lean().exec()
+    let resp= await Album.find({genre:{$regex:nikal}}).populate('artist').skip(offset).limit(limit).sort(['year',sort1]).lean().exec()
 
 
    return  res.status(200).send({data:resp,totalpage:totalpage})
