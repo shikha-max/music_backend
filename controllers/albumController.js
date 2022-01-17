@@ -61,6 +61,21 @@ router.get('/search',async (req, res)=>{
 
 router.get('/',async (req, res)=>{
     try {
+
+        let s = req.query.q
+  if(s){
+      
+    let nikal = new RegExp(s, "i")
+    let page= +req.query.page||1
+    let limit= +req.query.limit||6
+    let offset=Math.ceil((page-1)*limit)
+    let totalpage= await Album.find().countDocuments()
+   
+    let resp= await Album.find({genre:{$regex:nikal}}).populate('artist').skip(offset).limit(limit).lean().exec()
+
+
+   return  res.status(200).send({data:resp,totalpage:totalpage})
+  }
         
     let page= +req.query.page||1
     let limit= +req.query.limit||6
