@@ -66,7 +66,7 @@ router.get('/',async (req, res)=>{
         let sort1= req.query.sort
         
         
-  if(s){
+  if(s||sort1){
       
     let nikal = new RegExp(s, "i")
     let page= +req.query.page||1
