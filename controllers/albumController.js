@@ -67,7 +67,7 @@ router.get('/',async (req, res)=>{
       
     let nikal = new RegExp(s, "i")
     let page= +req.query.page||1
-    let limit= +req.query.limit||2
+    let limit= +req.query.limit||3
     let offset=Math.ceil((page-1)*limit)
     let totalpage= await Album.find({genre:{$regex:nikal}}).countDocuments()
     totalpage=Math.ceil(totalpage/limit)
@@ -79,7 +79,7 @@ router.get('/',async (req, res)=>{
   }
         
     let page= +req.query.page||1
-    let limit= +req.query.limit||6
+    let limit= +req.query.limit||2
     let offset=Math.ceil((page-1)*limit)
     let totalpage= await Album.find().countDocuments()
 
