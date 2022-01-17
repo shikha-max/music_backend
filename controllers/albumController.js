@@ -62,7 +62,7 @@ router.get('/search',async (req, res)=>{
 router.get('/',async (req, res)=>{
     try {
 
-        let s = req.query.f
+        let s = req.query.filter
   if(s){
       
     let nikal = new RegExp(s, "i")
