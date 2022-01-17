@@ -62,7 +62,7 @@ router.get('/search',async (req, res)=>{
 router.get('/',async (req, res)=>{
     try {
 
-        let s = req.query.filter
+        let s = req.query.filter||''
         let sort1= req.query.sort
         
         
