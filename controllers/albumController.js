@@ -66,7 +66,7 @@ router.get('/',async (req, res)=>{
         let sort1= +req.query.sort
         
         
-  if(s||sort1){
+  if(s&&sort1){
       
     let nikal = new RegExp(s, "i")
     let page= +req.query.page||1
@@ -76,6 +76,32 @@ router.get('/',async (req, res)=>{
     totalpage=Math.ceil(totalpage/limit)
    
     let resp= await Album.find({year:sort1,genre:{$regex:nikal}}).populate('artist').skip(offset).limit(limit).lean().exec()
+
+
+   return  res.status(200).send({data:resp,totalpage:totalpage})
+  }
+  else if(s){
+   let nikal = new RegExp(s, "i")
+    let page= +req.query.page||1
+    let limit= +req.query.limit||2
+    let offset=Math.ceil((page-1)*limit)
+    let totalpage= await Album.find({genre:s}).countDocuments()
+    totalpage=Math.ceil(totalpage/limit)
+   
+    let resp= await Album.find({genre:{$regex:nikal}}).populate('artist').skip(offset).limit(limit).lean().exec()
+
+
+   return  res.status(200).send({data:resp,totalpage:totalpage})
+  }
+  else if(sort1){
+    let nikal = new RegExp(s, "i")
+    let page= +req.query.page||1
+    let limit= +req.query.limit||2
+    let offset=Math.ceil((page-1)*limit)
+    let totalpage= await Album.find({year:sort1}).countDocuments()
+    totalpage=Math.ceil(totalpage/limit)
+   
+    let resp= await Album.find({year:sort1}).populate('artist').skip(offset).limit(limit).lean().exec()
 
 
    return  res.status(200).send({data:resp,totalpage:totalpage})
