@@ -72,7 +72,7 @@ router.get('/',async (req, res)=>{
     let page= +req.query.page||1
     let limit= +req.query.limit||2
     let offset=Math.ceil((page-1)*limit)
-    let totalpage= await Album.find({genre:s},{year:sort1}).countDocuments()
+    let totalpage= await Album.find({genre:{$regex:nikal},year:sort1}).countDocuments()
     totalpage=Math.ceil(totalpage/limit)
    
     let resp= await Album.find({year:sort1,genre:{$regex:nikal}}).populate('artist').skip(offset).limit(limit).lean().exec()
