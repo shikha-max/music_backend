@@ -1,8 +1,13 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const cors= require('cors')
 
 app.use(express.json())
+
+app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+
 
 const connect = async()=>{
     return await mongoose.connect('mongodb+srv://shikha:shikha_123@cluster0.wzqbc.mongodb.net/musicApp?retryWrites=true&w=majority')
