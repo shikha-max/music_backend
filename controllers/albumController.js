@@ -65,14 +65,19 @@ router.get('/',async (req, res)=>{
         let s = req.query.filter||''
         let sort1= +req.query.sort
         
-        
+        if(sort1=='High To LOW'){
+            sort1=-1
+        }
+        else{
+            sort1=1
+        }
   if(s&&sort1){
       
     let nikal = new RegExp(s, "i")
     let page= +req.query.page||1
     let limit= +req.query.limit||2
     let offset=Math.ceil((page-1)*limit)
-    let totalpage= await Album.find({year:sort1,genre:{$regex:nikal}}).countDocuments()
+    let totalpage= await Album.find({genre:{$regex:nikal}}).sort({year,sort1}).countDocuments()
     totalpage=Math.ceil(totalpage/limit)
    
     let resp= await Album.find({year:sort1,genre:{$regex:nikal}}).populate('artist').skip(offset).limit(limit).lean().exec()
