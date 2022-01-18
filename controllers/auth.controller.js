@@ -57,10 +57,10 @@ router.post("/login", async (req, res) => {
 //--------------------------getting all user------------------------------//
 
 
-router.get("/",async(req, res)=>{
+router.get("/:id",async(req, res)=>{
     try {
         
-        let response= await User.find({})
+        let response= await User.findById(req.params.id)
 
         return res.status(200).send({data:response})
     } catch (error) {
