@@ -47,8 +47,8 @@ router.post("/login", async (req, res) => {
 
     if (!user)return res.status(200).send({ msg: "user not find please sign up" });
 
-    if (user.password == req.body.password) return res.status(200).send({msg: "successfull login",data:user });
-    else return res.status(200).send({msg:'unsuccessfull'})
+    if (user.password == req.body.password) return res.status(200).send({sts:'400',msg: "successfull login",data:user });
+    else return res.status(200).send({sts:'400',msg:'unsuccessfull'})
   
   } catch (error) {
     return res.status(404).send({ err: error });
