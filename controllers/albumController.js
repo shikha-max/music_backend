@@ -65,7 +65,7 @@ router.get('/',async (req, res)=>{
         let s = req.query.filter||''
         let sort1= +req.query.sort
         
-        if(sort1=='High To LOW'){
+        if(sort1=='HighToLOW'){
             sort1=-1
         }
         else{
