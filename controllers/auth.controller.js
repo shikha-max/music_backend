@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
   try {
     let user = await User.findOne({ email: req.body.email });
 
-    if (!user)return res.status(404).send({ err: "user not find please sign up" });
+    if (!user)return res.status(200).send({ err: "user not find please sign up" });
 
     if (user.password == req.body.password) return res.status(200).send({msg: "successfull login",data:user });
     else return res.status(200).send({msg:'unsuccessfull'})
