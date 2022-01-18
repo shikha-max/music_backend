@@ -62,9 +62,10 @@ router.post("/login", async (req, res) => {
 router.get("/:id",async(req, res)=>{
     try {
         
-        let response= await User.findById(req.params.id).populate('album')
+        let response= await User.findById(req.params.id)
+        let album= await Album.find({artist:req.params.id})
 
-        return res.status(200).send({data:response})
+        return res.status(200).send({data:response,album:album})
     } catch (error) {
         return res.status(400).send({err:error})
     }
